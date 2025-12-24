@@ -1,0 +1,18 @@
+name: scanpy_env
+channels:
+  - conda-forge
+  - pytorch
+  - bioconda
+dependencies:
+  - python=3.11
+  - pytorch
+  - scanpy>=1.9
+  - h5py
+  - anndata
+  - matplotlib
+  - pandas
+  - numpy
+  - scipy
+  - pip
+  - pip:
+    - git+https://github.com/broadinstitute/CellBender.git@4334e8966217c3591bf7c545f31ab979cdc6590d

@@ -1,0 +1,41 @@
+# Nextflow work directories
+work/
+.nextflow*
+.cache/
+.data/
+
+# Output directories
+results/
+h5_files/
+output/
+logs/
+trace.txt
+timeline.html
+report.html
+# Nextflow work directories
+work/
+.nextflow*
+.cache/
+.data/
+
+# Output directories
+results/
+h5_files/
+output/
+logs/
+trace.txt
+timeline.html
+report.html
+                                                                          
+# Python/Conda
+*.pyc
+__pycache__/
+.env/
+.conda/
+envs/*/conda-meta/
+*.h5ad
+*.h5
+*.pdf
+
+# VS Code
+.vscode/
