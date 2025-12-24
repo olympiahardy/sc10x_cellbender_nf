@@ -15,14 +15,16 @@ workflow {
     log.info "Running CellBender + QC for all samples..."
 
     Channel
-        .fromPath(params.input_glob)
-        .map { dir ->
-            def sample_id = dir.parent.name
-            log.info "Found sample: ${sample_id}  (${dir})"
-            tuple(sample_id, dir)
-        }
-        .set { ch_samples }
+    .fromPath(params.input_glob, type: 'dir', followLinks: true)
+    .view { dir -> log.info "Matched outs dir: ${dir}" }
+    .ifEmpty { error "No input matched --input_glob: ${params.input_glob}" }
+    .map { dir ->
+        def sample_id = dir.parent.name
+        tuple(sample_id, dir)
+    }
+    .set { ch_samples }
 
+    ch_samples.view { "SAMPLE: ${it[0]}  DIR: ${it[1]}" }
     SINGLE_SAMPLE_QC(ch_samples)
 }
 
