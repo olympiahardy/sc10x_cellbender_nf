@@ -16,6 +16,7 @@ process CELLBENDER_REMOVE_BACKGROUND {
     tuple val(sample_id),
           path("*_raw_input.h5"),
           path("*_cellbender_output.h5"),
+          path("*_output_report.html"),
           emit: cb_out
 
     script:
@@ -63,6 +64,8 @@ process CELLBENDER_REMOVE_BACKGROUND {
     --input "\$RAW_OUT" \
     --output "\$CB_OUT" \
     \$CUDA_FLAG
+
+    mv output_report.html "${sample_id}_output_report.html"
 
     echo "Finished CellBender for sample: ${sample_id}"
     """

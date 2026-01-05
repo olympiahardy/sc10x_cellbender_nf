@@ -3,7 +3,7 @@ nextflow.enable.dsl = 2
 include { CELLBENDER } from './subworkflows/local/cellbender'
 // input_glob is a parameter that the user will use in the nextflow launch command that should point to the CellRanger 'outs' directories
 params.input_glob = params.input_glob ?: null
-params.outdir     = params.outdir     ?: 'results'
+params.outdir     = params.outdir     ?: null
 // This is the actual execution of the pipeline
 workflow {
     // First we validate the input paths provided by the user
@@ -11,7 +11,12 @@ workflow {
         error "You must provide --input_glob, this should be your directory path to your CellRanger 'outs' directories, for example '/path/to/*/outs'"
     }
 
+    if ( !params.outdir ) {
+    error "You must provide --outdir, where you want your results to be saved"
+    }   
+
     log.info "Loading CellRanger samples from: ${params.input_glob}"
+    log.info "Outputs will be saved to: ${params.outdir}"
     log.info "Running CellBender on all samples..."
     // Here we create a Channel that contains tuples of sample_id and the CellRanger outs directory path for each sample found
     Channel
