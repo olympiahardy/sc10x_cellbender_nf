@@ -6,13 +6,13 @@ params.input_glob = params.input_glob ?: null
 params.outdir     = params.outdir     ?: null
 // This is the actual execution of the pipeline
 workflow {
-    // First we validate the input paths provided by the user
+    // First we validate the input/output paths provided by the user
     if ( !params.input_glob ) {
         error "You must provide --input_glob, this should be your directory path to your CellRanger 'outs' directories, for example '/path/to/*/outs'"
     }
 
     if ( !params.outdir ) {
-    error "You must provide --outdir, where you want your results to be saved"
+    error "You must provide --outdir, where do you want your results to be saved?"
     }   
 
     log.info "Loading CellRanger samples from: ${params.input_glob}"

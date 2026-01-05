@@ -8,6 +8,6 @@ workflow CELLBENDER {
     // Run the process in Cellbender_remove_background.nf which we call above
     CELLBENDER_REMOVE_BACKGROUND(ch_samples)
 
-    emit: // Extract the outputs of Cellbender_remove_background.nf which will be the two h5 files one corrected one raw
+    emit: // Extract the outputs of Cellbender_remove_background.nf which will be the two h5 files one corrected one raw and the output report from Cellbender
     cb_out = CELLBENDER_REMOVE_BACKGROUND.out.cb_out
 }
