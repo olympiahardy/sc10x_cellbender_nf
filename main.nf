@@ -1,6 +1,6 @@
 nextflow.enable.dsl = 2
 
-include { SINGLE_SAMPLE_QC } from './subworkflows/local/single_sample_qc'
+include { CELLBENDER } from './subworkflows/local/cellbender'
 
 params.input_glob = params.input_glob ?: null
 params.outdir     = params.outdir     ?: 'results'
@@ -12,7 +12,7 @@ workflow {
     }
 
     log.info "Loading CellRanger samples from: ${params.input_glob}"
-    log.info "Running CellBender + QC for all samples..."
+    log.info "Running CellBender on all samples..."
 
     Channel
     .fromPath(params.input_glob, type: 'dir', followLinks: true)
@@ -25,7 +25,7 @@ workflow {
     .set { ch_samples }
 
     ch_samples.view { "SAMPLE: ${it[0]}  DIR: ${it[1]}" }
-    SINGLE_SAMPLE_QC(ch_samples)
+    CELLBENDER(ch_samples)
 }
 
 workflow.onComplete {
