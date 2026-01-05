@@ -63,9 +63,9 @@ process CELLBENDER_REMOVE_BACKGROUND {
     fi
 
     cellbender remove-background \
-    --input "$RAW_OUT" \
-    --output "$CB_OUT" \
-    $CUDA_FLAG
+    --input "\$RAW_OUT" \
+    --output "\$CB_OUT" \
+    \$CUDA_FLAG
 
     echo "Finished CellBender for sample: ${sample_id}"
     """
