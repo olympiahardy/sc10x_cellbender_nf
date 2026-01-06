@@ -65,8 +65,6 @@ process CELLBENDER_REMOVE_BACKGROUND {
     --output "\$CB_OUT" \
     \$CUDA_FLAG
 
-    mv output_report.html "${sample_id}_output_report.html"
-
     echo "Finished CellBender for sample: ${sample_id}"
     """
 }
